@@ -3,13 +3,20 @@
   <con:entry key="steamid" value="76561198041762217"/>
   <con:entry key="format" value="json"/>
   <con:entry key="key" value="54E82E96A6E43ED09207FCAF2BD5BE2D"/>
-</con:parameters><con:parameterOrder><con:entry>key</con:entry><con:entry>steamid</con:entry><con:entry>format</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="GetAppID" id="9ce85b95-6b01-405a-b856-e0151e536b2a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>A_ID</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>OwnedGames</con:sourceStep><con:sourcePath>$.response.games.[*].appid</con:sourcePath><con:targetType>GameID_2</con:targetType><con:targetStep>#TestSuite#</con:targetStep><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="GetAID" id="6e7e77b0-a947-4bba-8568-cf407670eb27"><con:settings/><con:config><script>def a =testRunner.testCase.testSuite.getPropertyValue("GameID")
-def b =testRunner.testCase.testSuite.getPropertyValue("GameID_2")
-//String[] c = a.intersect(b)
-//def c = a+b
-//def e = a-b
-//def f = b-a
-//def g = c-e
-//def h = g-f
-//log.info f
-log.info b</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase>
+</con:parameters><con:parameterOrder><con:entry>key</con:entry><con:entry>steamid</con:entry><con:entry>format</con:entry></con:parameterOrder></con:restRequest></con:config></con:testStep><con:testStep type="transfer" name="GetAppID" id="9ce85b95-6b01-405a-b856-e0151e536b2a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>A_ID</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>OwnedGames</con:sourceStep><con:sourcePath>$.response.games.[*].appid</con:sourcePath><con:targetType>GameID_2</con:targetType><con:targetStep>#TestSuite#</con:targetStep><con:type>JSONPATH</con:type><con:targetTransferType>JSONPATH</con:targetTransferType><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="GetAID" id="6e7e77b0-a947-4bba-8568-cf407670eb27"><con:settings/><con:config><script>//import jxl.*; 
+//import jxl.write.*
+def a =testRunner.testCase.testSuite.getPropertyValue("GameID") 
+def b =testRunner.testCase.testSuite.getPropertyValue("GameID_2") 
+//def  c = a.intersect(b) 
+
+def c =  a[1..a.length()-2].tokenize(',')
+def d =   b[1..b.length()-2].tokenize(',')
+def f = d.intersect(c)
+int arraySize = f.size()
+log.info arraySize
+log.info f
+
+//for(int i =0;  i &lt; arraySize;  i++)
+//testRunner.testCase.testSuite.setPropertyValue("CommonID", f[i])
+//testRunner.runTestStepByName("GetAchivements")
+</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase>
